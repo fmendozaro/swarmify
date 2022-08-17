@@ -26,7 +26,7 @@ express()
 
         res.send(testJson);
     })
-    .get('/api/get-pending', (request, response) => {
+    .post('/api/get-pending', (request, response) => {
 
         getCollaborators();
 
@@ -36,8 +36,9 @@ express()
 
                     let responseText = 'Following tasks need your attention\n';
                     let counter = 1;
+
                     results.data.forEach( curUser => {
-                        responseText += `${counter}. ${curUser.login} -> <${curUser.received_events_url.get(0).repo.url}> -> needs review (${Math.random() * (5 - 0) + 0} upvotes)\n`;
+                        responseText += `${counter}. ${curUser.login} -> <https://github.com/${curUser.login}/${repo}> -> needs review (${Math.floor(Math.random() * 5)} upvotes)\n`;
                         counter++;
                     })
 
