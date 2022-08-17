@@ -26,14 +26,16 @@ express()
 
         res.send(testJson);
     })
-    .get('/api/get-pending', (request, response) => {
+    .post('/api/get-pending', (request, response) => {
+
+        response.set('Content-Type', 'application/x-www-form-urlencode')
 
         getCollaborators();
 
         function getCollaborators(){
             axios.get(`https://api.github.com/repos/${username}/${repo}/collaborators`, commonHeader)
                 .then(results => {
-                    response.json(results.data);
+                    response.send(JSON.stringify(results.data));
                     // data.forEach(members => {
                     //     getReviews(members.login);
                     // })
