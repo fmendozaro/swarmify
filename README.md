@@ -15,7 +15,9 @@ $ npm install
 $ npm start
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+Your app should now be running on [localhost:5002](http://localhost:5001/).
+
+Current test url to get Github info[http://localhost:5001/api/get-pending](http://localhost:5001/api/get-pending)
 
 ## Deploying to Heroku
 

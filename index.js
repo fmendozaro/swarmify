@@ -34,9 +34,9 @@ express()
             axios.get(`https://api.github.com/repos/${username}/${repo}/collaborators`, commonHeader)
                 .then(results => {
                     response.json(results.data);
-                    data.forEach(members => {
-                        getReviews(members.login);
-                    })
+                    // data.forEach(members => {
+                    //     getReviews(members.login);
+                    // })
                 })
                 .catch(error => {
                     response.send(error);
@@ -45,21 +45,18 @@ express()
 
         function getPullRequests(){
             axios.get(`https://api.github.com/repos/${username}/${repo}/pulls`, commonHeader)
-                .then(res => {
-                    console.log(`statusCode: ${res.status}`);
-                    console.log(res);
-                    // getReviews(1);
+                .then(results => {
+                    response.json(results.data);
                 })
                 .catch(error => {
                     response.send(error);
                 });
         }
 
-        function getReviews(pullNumber){
-            axios.get(`https://api.github.com/repos/${username}/${repo}/pulls/${pullNumber}/reviews/`, commonHeader)
-                .then(res => {
-                    console.log(`statusCode: ${res.status}`);
-                    console.log(res);
+        function getReviews(currentUser){
+            axios.get(`https://api.github.com/repos/${currentUser}/${repo}/pulls?state=all`, commonHeader)
+                .then(results => {
+                    response.json(results.data);
                 })
                 .catch(error => {
                     response.send(error);
