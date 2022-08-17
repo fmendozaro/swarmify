@@ -28,14 +28,28 @@ express()
     })
     .post('/api/get-pending', (request, response) => {
 
-        response.set('Content-Type', 'application/x-www-form-urlencode')
+        // response.set('Content-Type', 'application/x-www-form-urlencode')
 
         getCollaborators();
 
         function getCollaborators(){
             axios.get(`https://api.github.com/repos/${username}/${repo}/collaborators`, commonHeader)
                 .then(results => {
-                    response.send(JSON.stringify(results.data));
+
+                    let responseText = 'Following tasks need your attention\n' +
+                        '1. fernando -> link -> needs review (1 upvote)\n' +
+                        '2. saibaskaran -> link -> needs review (0 upvotes)';
+
+                    // results.data.forEach( curUser = {
+                    //
+                    // })
+
+                    let finalResponse = {
+                        "response_type": "in_channel",
+                        "text": responseText
+                    }
+                    response.send(finalResponse);
+
                     // data.forEach(members => {
                     //     getReviews(members.login);
                     // })
