@@ -39,7 +39,7 @@ express()
                     let responseText = 'Following tasks need your attention\n';
                     let counter = 1;
                     results.data.forEach( curUser => {
-                        responseText += `${counter}. ${curUser.login} -> <${curUser.received_events_url}> -> needs review (${Math.random(5)} upvote)\n`;
+                        responseText += `${counter}. ${curUser.login} -> <${curUser.received_events_url.get(0).repo.url}> -> needs review (${Math.random() * (5 - 0) + 0} upvotes)\n`;
                         counter++;
                     })
 
