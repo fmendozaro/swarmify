@@ -36,13 +36,12 @@ express()
             axios.get(`https://api.github.com/repos/${username}/${repo}/collaborators`, commonHeader)
                 .then(results => {
 
-                    let responseText = 'Following tasks need your attention\n' +
-                        '1. fernando -> link -> needs review (1 upvote)\n' +
-                        '2. saibaskaran -> link -> needs review (0 upvotes)';
-
-                    // results.data.forEach( curUser = {
-                    //
-                    // })
+                    let responseText = 'Following tasks need your attention\n';
+                    let counter = 1;
+                    results.data.forEach( curUser => {
+                        responseText += `${counter}. ${curUser.login} -> <${curUser.received_events_url}> -> needs review (${Math.random(5)} upvote)\n`;
+                        counter++;
+                    })
 
                     let finalResponse = {
                         "response_type": "in_channel",
